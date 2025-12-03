@@ -107,11 +107,11 @@ export default function Planificador() {
                       highlighted={highlightedIds.includes(materia.id)}
                       onClick={(e) => handleCardClick(materia, e)}
                     />
-                  ))}
+                  ))} 
               </div>
             </div>
           );
-        })}
+        })}   
       </div>
 
       {toast && (
