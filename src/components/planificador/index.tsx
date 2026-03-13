@@ -6,12 +6,11 @@ import { useDragScroll } from '../../hooks/useDragScroll';
 import MateriaCard from './MateriaCard';
 import Toast from './Toast';
 
-type CarreraId = 'sistemas';
+type CarreraId = 'sistemas' | 'industrial';
 
 const CARRERAS: { id: CarreraId; nombre: string }[] = [
-  { id: 'sistemas', nombre: 'Ingeniería en Sistemas' }
-  // Cuando tengas otros planes con la misma estructura de `Materia`,
-  // podés agregarlos acá y en el switch del useEffect de carga.
+  { id: 'sistemas', nombre: 'Ingeniería en Sistemas' },
+  { id: 'industrial', nombre: 'Ingeniería Industrial' }
 ];
 
 export default function Planificador() {
@@ -30,10 +29,20 @@ export default function Planificador() {
             if (!cancelled) setMaterias(mod.materias as Materia[]);
             break;
           }
-          // case 'industrial':
-          //   const modInd = await import('../../data/industrial-materias'); // dataset compatible con `Materia`
-          //   if (!cancelled) setMaterias(modInd.materias as Materia[]);
-          //   break;
+          case 'industrial': {
+            const modInd: any = await import('../../data/industrial');
+            const materiasAdaptadas: Materia[] = (modInd.materiasIndustrial || []).map((m: any) => ({
+              id: m.id,
+              nombre: m.nombre,
+              anio: 1,
+              cuatrimestre: 'Anual',
+              correlativas: (m.requisitos || [])
+                .filter((r: any) => r.materiaId)
+                .map((r: any) => r.materiaId as string)
+            }));
+            if (!cancelled) setMaterias(materiasAdaptadas);
+            break;
+          }
         }
       } finally {
         if (!cancelled) setLoading(false);

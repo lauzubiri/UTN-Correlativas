@@ -1,3 +1,5 @@
+import type { Materia } from './types';
+
 export type TipoRequisito = 'aprobada' | 'cursada' | 'finales_cantidad';
 
 export interface Requisito {
@@ -6,13 +8,13 @@ export interface Requisito {
   cantidad?: number;
 }
 
-export interface MateriaIndustrial {
+export interface MateriaIndustrialBase {
   id: string;
   nombre: string;
   requisitos: Requisito[];
 }
 
-export const materiasIndustrial: MateriaIndustrial[] = [
+export const materiasIndustrial: MateriaIndustrialBase[] = [
   {
     id: 'analisis-mat-1',
     nombre: 'Análisis Matemático I',
@@ -405,26 +407,5 @@ export const materiasIndustrial: MateriaIndustrial[] = [
       { tipo: 'aprobada', materiaId: 'electrotecnia-maquinas-electricas' },
       { tipo: 'aprobada', materiaId: 'ingles-2' }
     ]
-  },
-  {
-    id: 'practica-profesional-supervisada',
-    nombre: 'Práctica Profesional Supervisada',
-    requisitos: [
-      { tipo: 'cursada', materiaId: 'analisis-numerico-calculo-avanzado' },
-      { tipo: 'cursada', materiaId: 'seguridad-higiene-ingenieria-ambiental' },
-      { tipo: 'cursada', materiaId: 'investigacion-operativa' },
-      { tipo: 'cursada', materiaId: 'procesos-industriales' },
-      { tipo: 'cursada', materiaId: 'evaluacion-proyectos' },
-      { tipo: 'cursada', materiaId: 'planificacion-control-produccion' },
-      { tipo: 'aprobada', materiaId: 'estudio-trabajo' },
-      { tipo: 'aprobada', materiaId: 'comercializacion' },
-      { tipo: 'aprobada', materiaId: 'termodinamica-maquinas-termicas' },
-      { tipo: 'aprobada', materiaId: 'estatica-resistencia-materiales' },
-      { tipo: 'aprobada', materiaId: 'mecanica-fluidos' },
-      { tipo: 'aprobada', materiaId: 'economia-empresa' },
-      { tipo: 'aprobada', materiaId: 'electrotecnia-maquinas-electricas' },
-      { tipo: 'aprobada', materiaId: 'ingles-2' }
-    ]
   }
 ];
-
