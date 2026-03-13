@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { materias } from '../../data/materias';
 import type { Materia } from '../../data/types';
 
 import { useMaterias } from '../../hooks/useMaterias';
@@ -7,8 +6,48 @@ import { useDragScroll } from '../../hooks/useDragScroll';
 import MateriaCard from './MateriaCard';
 import Toast from './Toast';
 
+type CarreraId = 'sistemas';
+
+const CARRERAS: { id: CarreraId; nombre: string }[] = [
+  { id: 'sistemas', nombre: 'Ingeniería en Sistemas' }
+  // Cuando tengas otros planes con la misma estructura de `Materia`,
+  // podés agregarlos acá y en el switch del useEffect de carga.
+];
+
 export default function Planificador() {
-  const { aprobadas, toggleMateria, toggleAnio, estaHabilitada } = useMaterias();
+  const [selectedCarrera, setSelectedCarrera] = useState<CarreraId>('sistemas');
+  const [materias, setMaterias] = useState<Materia[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    let cancelled = false;
+    const cargarMaterias = async () => {
+      setLoading(true);
+      try {
+        switch (selectedCarrera) {
+          case 'sistemas': {
+            const mod = await import('../../data/sistemas');
+            if (!cancelled) setMaterias(mod.materias as Materia[]);
+            break;
+          }
+          // case 'industrial':
+          //   const modInd = await import('../../data/industrial-materias'); // dataset compatible con `Materia`
+          //   if (!cancelled) setMaterias(modInd.materias as Materia[]);
+          //   break;
+        }
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    };
+
+    void cargarMaterias();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [selectedCarrera]);
+
+  const { aprobadas, toggleMateria, toggleAnio, estaHabilitada } = useMaterias(materias);
   const { sliderRef, isDown, startDrag, stopDrag, onDrag } = useDragScroll();
 
   const [toast, setToast] = useState<{ visible: boolean; titulo: string; faltantes: string[] } | null>(null);
@@ -53,6 +92,32 @@ export default function Planificador() {
 
   return (
     <>
+      <div className="mb-6 flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+        <div>
+          <label htmlFor="carrera-select" className="block text-sm font-medium text-gray-700 mb-1">
+            Carrera
+          </label>
+          <select
+            id="carrera-select"
+            value={selectedCarrera}
+            onChange={(e) => setSelectedCarrera(e.target.value as CarreraId)}
+            className="block w-full md:w-72 rounded-md border border-gray-300 bg-white py-2 px-3 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          >
+            {CARRERAS.map((carrera) => (
+              <option key={carrera.id} value={carrera.id}>
+                {carrera.nombre}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        {loading && (
+          <div className="text-sm text-gray-500">
+            Cargando materias...
+          </div>
+        )}
+      </div>
+
       <div
         ref={sliderRef}
         onMouseDown={startDrag}
@@ -65,7 +130,19 @@ export default function Planificador() {
           ${isDown ? 'md:cursor-grabbing' : ''}
         `}
       >
-        {anios.map((anio) => {
+        {loading && materias.length === 0 && (
+          <div className="w-full text-center text-gray-500 py-10">
+            Cargando mapa de materias...
+          </div>
+        )}
+
+        {!loading && materias.length === 0 && (
+          <div className="w-full text-center text-gray-500 py-10">
+            No hay materias para la carrera seleccionada.
+          </div>
+        )}
+
+        {!loading && materias.length > 0 && anios.map((anio) => {
           const materiasDelAnio = materias.filter(m => m.anio === anio);
           const aprobadasDelAnio = materiasDelAnio.filter(m => aprobadas.includes(m.id)).length;
           const totalDelAnio = materiasDelAnio.length;

@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
-import { materias } from '../data/materias';
 import type { Materia } from '../data/types';
 
-export function useMaterias() {
+export function useMaterias(materias: Materia[]) {
   const [aprobadas, setAprobadas] = useState<string[]>([]);
 
   // Carga inicial desde localStorage
