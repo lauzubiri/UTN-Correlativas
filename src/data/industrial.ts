@@ -15,7 +15,7 @@ export interface MateriaIndustrialBase {
   requisitos: Requisito[];
 }
 
-export const materiasIndustrial: MateriaIndustrialBase[] = [
+export const materias: Materia[] = [
     // --- PRIMER AÑO ---
     { id: 'analisis-mat-1', nombre: 'Análisis Matemático I', anio: 1, requisitos: [] },
     { id: 'quimica-gral', nombre: 'Química General', anio: 1, requisitos: [] },

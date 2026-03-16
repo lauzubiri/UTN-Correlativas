@@ -6,251 +6,251 @@ export const materias: Materia[] = [
     nombre: 'Análisis Matemático I',
     anio: 1,
     cuatrimestre: 'Anual',
-    correlativas: []
+    requisitos: []
   },
   {
     id: 'algebra-geo',
     nombre: 'Álgebra y Geometría Analítica',
     anio: 1,
     cuatrimestre: 'Anual',
-    correlativas: []
+    requisitos: []
   },
   {
     id: 'fisica-1',
     nombre: 'Física I',
     anio: 1,
     cuatrimestre: 'Anual',
-    correlativas: []
+    requisitos: []
   },
   {
     id: 'logica-discreta',
     nombre: 'Lógica y Estructuras Discretas',
     anio: 1,
     cuatrimestre: 'Anual',
-    correlativas: []
+    requisitos: []
   },
   {
     id: 'algoritmos',
     nombre: 'Algoritmos y Estructuras de Datos',
     anio: 1,
     cuatrimestre: 'Anual',
-    correlativas: []
+    requisitos: []
   },
   {
     id: 'sis-negocio',
     nombre: 'Sistemas y Procesos de Negocio',
     anio: 1,
     cuatrimestre: 'Anual',
-    correlativas: []
+    requisitos: []
   },
   {
     id: 'arq-computadores',
     nombre: 'Arquitectura de Computadores',
     anio: 1,
     cuatrimestre: 'Anual',
-    correlativas: []
+    requisitos: []
   },
   {
     id: 'ingles-1',
     nombre: 'Inglés I',
     anio: 1,
     cuatrimestre: 'Anual',
-    correlativas: []
+    requisitos: []
   },
   {
     id: 'analisis-mat-2',
     nombre: 'Análisis Matemático II',
     anio: 2,
     cuatrimestre: 'Anual',
-    correlativas: ['analisis-mat-1', 'algebra-geo']
+    requisitos: [{ tipo: 'cursada', materiaId: 'analisis-mat-1' }, { tipo: 'cursada', materiaId: 'algebra-geo' }]
   },
   {
     id: 'fisica-2',
     nombre: 'Física II',
     anio: 2,
     cuatrimestre: 'Anual',
-    correlativas: ['fisica-1', 'analisis-mat-1']
+    requisitos: [{ tipo: 'cursada', materiaId: 'fisica-1' }, { tipo: 'cursada', materiaId: 'analisis-mat-1' }]
   },
   {
     id: 'sintaxis',
     nombre: 'Sintaxis y Semántica de los Lenguajes',
     anio: 2,
     cuatrimestre: '1º Cuatrimestre',
-    correlativas: ['logica-discreta', 'algoritmos']
+    requisitos: [{ tipo: 'cursada', materiaId: 'logica-discreta' }, { tipo: 'cursada', materiaId: 'algoritmos' }]
   },
   {
     id: 'paradigmas',
     nombre: 'Paradigmas de Programación',
     anio: 2,
     cuatrimestre: '2º Cuatrimestre',
-    correlativas: ['logica-discreta', 'algoritmos']
+    requisitos: [{ tipo: 'cursada', materiaId: 'logica-discreta' }, { tipo: 'cursada', materiaId: 'algoritmos' }]
   },
   {
     id: 'analisis-sistemas',
     nombre: 'Análisis de Sistemas de Información',
     anio: 2,
     cuatrimestre: 'Anual',
-    correlativas: ['sis-negocio', 'algoritmos']
+    requisitos: [{ tipo: 'cursada', materiaId: 'sis-negocio' }, { tipo: 'cursada', materiaId: 'algoritmos' }]
   },
   {
     id: 'sistemas-operativos',
     nombre: 'Sistemas Operativos',
     anio: 2,
     cuatrimestre: 'Anual',
-    correlativas: ['arq-computadores', 'algoritmos']
+    requisitos: [{ tipo: 'cursada', materiaId: 'arq-computadores' }, { tipo: 'cursada', materiaId: 'algoritmos' }]
   },
   {
     id: 'ingenieria-sociedad',
     nombre: 'Ingeniería y Sociedad',
     anio: 2,
     cuatrimestre: 'Anual',
-    correlativas: []
+    requisitos: []
   },
   {
     id: 'ingles-2',
     nombre: 'Inglés II',
     anio: 2,
     cuatrimestre: 'Anual',
-    correlativas: ['ingles-1']
+    requisitos: [{ tipo: 'cursada', materiaId: 'ingles-1' }]
   },
   {
     id: 'analisis-numerico',
     nombre: 'Análisis Numérico',
     anio: 3,
     cuatrimestre: 'Anual',
-    correlativas: ['analisis-mat-2', 'algebra-geo', 'algoritmos']
+    requisitos: [{ tipo: 'cursada', materiaId: 'analisis-mat-2' }, { tipo: 'cursada', materiaId: 'algebra-geo' }, { tipo: 'cursada', materiaId: 'algoritmos' }]
   },
   {
     id: 'probabilidad-estadistica',
     nombre: 'Probabilidad y Estadística',
     anio: 3,
     cuatrimestre: 'Anual',
-    correlativas: ['analisis-mat-1', 'algebra-geo']
+    requisitos: [{ tipo: 'cursada', materiaId: 'analisis-mat-1' }, { tipo: 'cursada', materiaId: 'algebra-geo' }]
   },
   {
     id: 'diseno-sistemas',
     nombre: 'Diseño de Sistemas de Información',
     anio: 3,
     cuatrimestre: 'Anual',
-    correlativas: ['analisis-sistemas', 'paradigmas', 'sintaxis']
+    requisitos: [{ tipo: 'cursada', materiaId: 'analisis-sistemas' }, { tipo: 'cursada', materiaId: 'paradigmas' }, { tipo: 'cursada', materiaId: 'sintaxis' }]
   },
   {
     id: 'desarrollo-software',
     nombre: 'Desarrollo de Software',
     anio: 3,
     cuatrimestre: 'Anual',
-    correlativas: ['paradigmas', 'analisis-sistemas']
+    requisitos: [{ tipo: 'cursada', materiaId: 'paradigmas' }, { tipo: 'cursada', materiaId: 'analisis-sistemas' }]
   },
   {
     id: 'bases-datos',
     nombre: 'Bases de Datos',
     anio: 3,
     cuatrimestre: '1º Cuatrimestre',
-    correlativas: ['analisis-sistemas', 'sintaxis', 'algoritmos']
+    requisitos: [{ tipo: 'cursada', materiaId: 'analisis-sistemas' }, { tipo: 'cursada', materiaId: 'sintaxis' }, { tipo: 'cursada', materiaId: 'algoritmos' }]
   },
   {
     id: 'comunicaciones',
     nombre: 'Comunicación de Datos',
     anio: 3,
     cuatrimestre: '1º Cuatrimestre',
-    correlativas: ['fisica-2', 'arq-computadores', 'analisis-mat-2']
+    requisitos: [{ tipo: 'cursada', materiaId: 'fisica-2' }, { tipo: 'cursada', materiaId: 'arq-computadores' }, { tipo: 'cursada', materiaId: 'analisis-mat-2' }]
   },
   {
     id: 'economia',
     nombre: 'Economía',
     anio: 3,
     cuatrimestre: '2º Cuatrimestre',
-    correlativas: ['analisis-sistemas']
+    requisitos: [{ tipo: 'cursada', materiaId: 'analisis-sistemas' }]
   },
   {
     id: 'inv-operativa',
     nombre: 'Investigación Operativa',
     anio: 4,
     cuatrimestre: '1º Cuatrimestre',
-    correlativas: ['probabilidad-estadistica', 'analisis-numerico']
+    requisitos: [{ tipo: 'cursada', materiaId: 'probabilidad-estadistica' }, { tipo: 'cursada', materiaId: 'analisis-numerico' }]
   },
   {
     id: 'simulacion',
     nombre: 'Simulación',
     anio: 4,
     cuatrimestre: '1º Cuatrimestre',
-    correlativas: ['probabilidad-estadistica', 'logica-discreta']
+    requisitos: [{ tipo: 'cursada', materiaId: 'probabilidad-estadistica' }, { tipo: 'cursada', materiaId: 'logica-discreta' }]
   },
   {
     id: 'automatizacion',
     nombre: 'Tecnologías para la Automatización',
     anio: 4,
     cuatrimestre: '2º Cuatrimestre',
-    correlativas: ['analisis-mat-2', 'fisica-2']
+    requisitos: [{ tipo: 'cursada', materiaId: 'analisis-mat-2' }, { tipo: 'cursada', materiaId: 'fisica-2' }]
   },
   {
     id: 'ing-calidad',
     nombre: 'Ingeniería y Calidad de Software',
     anio: 4,
     cuatrimestre: '1º Cuatrimestre',
-    correlativas: ['desarrollo-software', 'diseno-sistemas', 'probabilidad-estadistica']
+    requisitos: [{ tipo: 'cursada', materiaId: 'desarrollo-software' }, { tipo: 'cursada', materiaId: 'diseno-sistemas' }, { tipo: 'cursada', materiaId: 'probabilidad-estadistica' }]
   },
   {
     id: 'admin-sistemas',
     nombre: 'Administración de Sistemas de Información',
     anio: 4,
     cuatrimestre: 'Anual',
-    correlativas: ['diseno-sistemas', 'bases-datos', 'economia']
+    requisitos: [{ tipo: 'cursada', materiaId: 'diseno-sistemas' }, { tipo: 'cursada', materiaId: 'bases-datos' }, { tipo: 'cursada', materiaId: 'economia' }]
   },
   {
     id: 'redes-datos',
     nombre: 'Redes de Datos',
     anio: 4,
     cuatrimestre: '2º Cuatrimestre',
-    correlativas: ['comunicaciones', 'sistemas-operativos']
+    requisitos: [{ tipo: 'cursada', materiaId: 'comunicaciones' }, { tipo: 'cursada', materiaId: 'sistemas-operativos' }]
   },
   {
     id: 'legislacion',
     nombre: 'Legislación',
     anio: 4,
     cuatrimestre: '2º Cuatrimestre',
-    correlativas: ['ing-sociedad', 'diseno-sistemas']
+    requisitos: [{ tipo: 'cursada', materiaId: 'ing-sociedad' }, { tipo: 'cursada', materiaId: 'diseno-sistemas' }]
   },
   {
     id: 'ia',
     nombre: 'Inteligencia Artificial',
     anio: 5,
     cuatrimestre: '1º Cuatrimestre',
-    correlativas: ['simulacion', 'inv-operativa']
+    requisitos: [{ tipo: 'cursada', materiaId: 'simulacion' }, { tipo: 'cursada', materiaId: 'inv-operativa' }]
   },
   {
     id: 'ciencia-datos',
     nombre: 'Ciencia de Datos',
     anio: 5,
     cuatrimestre: '1º Cuatrimestre',
-    correlativas: ['bases-datos', 'probabilidad-estadistica', 'simulacion']
+    requisitos: [{ tipo: 'cursada', materiaId: 'bases-datos' }, { tipo: 'cursada', materiaId: 'probabilidad-estadistica' }, { tipo: 'cursada', materiaId: 'simulacion' }]
   },
   {
     id: 'sistemas-gestion',
     nombre: 'Sistemas de Gestión',
     anio: 5,
     cuatrimestre: 'Anual',
-    correlativas: ['admin-sistemas', 'inv-operativa']
+    requisitos: [{ tipo: 'cursada', materiaId: 'admin-sistemas' }, { tipo: 'cursada', materiaId: 'inv-operativa' }]
   },
   {
     id: 'gestion-gerencial',
     nombre: 'Gestión Gerencial',
     anio: 5,
     cuatrimestre: '1º Cuatrimestre',
-    correlativas: ['admin-sistemas', 'economia']
+    requisitos: [{ tipo: 'cursada', materiaId: 'admin-sistemas' }, { tipo: 'cursada', materiaId: 'economia' }]
   },
   {
     id: 'proyecto-final',
     nombre: 'Proyecto Final',
     anio: 5,
     cuatrimestre: 'Anual',
-    correlativas: ['admin-sistemas', 'ing-calidad', 'redes-datos']
+    requisitos: [{ tipo: 'cursada', materiaId: 'admin-sistemas' }, { tipo: 'cursada', materiaId: 'ing-calidad' }, { tipo: 'cursada', materiaId: 'redes-datos' }]
   },
   {
     id: 'seguridad',
     nombre: 'Seguridad en los Sistemas de Información',
     anio: 5,
     cuatrimestre: '2º Cuatrimestre',
-    correlativas: ['redes-datos', 'ing-calidad']
+      requisitos: [{ tipo: 'cursada', materiaId: 'redes-datos' }, { tipo: 'cursada', materiaId: 'ing-calidad' }]
   }
 ];

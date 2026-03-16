@@ -23,37 +23,20 @@ export default function Planificador() {
     const cargarMaterias = async () => {
       setLoading(true);
       try {
-        switch (selectedCarrera) {
-          case 'sistemas': {
-            const mod = await import('../../data/sistemas');
-            if (!cancelled) setMaterias(mod.materias as Materia[]);
-            break;
-          }
-          case 'industrial': {
-            const modInd: any = await import('../../data/industrial');
-            const materiasAdaptadas: Materia[] = (modInd.materiasIndustrial || []).map((m: any) => ({
-              id: m.id,
-              nombre: m.nombre,
-              anio: 1,
-              cuatrimestre: 'Anual',
-              correlativas: (m.requisitos || [])
-                .filter((r: any) => r.materiaId)
-                .map((r: any) => r.materiaId as string)
-            }));
-            if (!cancelled) setMaterias(materiasAdaptadas);
-            break;
-          }
+        const mod = await import(`../../data/${selectedCarrera}`);
+        if (!cancelled) {
+          const data = mod.materias || mod.materiasIndustrial;
+          setMaterias(data);
         }
+      } catch (error) {
+        console.error("Error cargando materias:", error);
       } finally {
         if (!cancelled) setLoading(false);
       }
     };
 
     void cargarMaterias();
-
-    return () => {
-      cancelled = true;
-    };
+    return () => { cancelled = true; };
   }, [selectedCarrera]);
 
   const { aprobadas, toggleMateria, toggleAnio, estaHabilitada } = useMaterias(materias);
@@ -62,7 +45,6 @@ export default function Planificador() {
   const [toast, setToast] = useState<{ visible: boolean; titulo: string; faltantes: string[] } | null>(null);
   const [highlightedIds, setHighlightedIds] = useState<string[]>([]);
 
-  // Auto-dismiss toast
   useEffect(() => {
     if (toast?.visible) {
       const timer = setTimeout(() => setToast(null), 4000);
@@ -70,7 +52,6 @@ export default function Planificador() {
     }
   }, [toast]);
 
-  // Clear highlighted items after 2s delay
   useEffect(() => {
     if (highlightedIds.length > 0) {
       const timer = setTimeout(() => setHighlightedIds([]), 2000);
@@ -80,18 +61,30 @@ export default function Planificador() {
 
   const handleCardClick = (materia: Materia, e: React.MouseEvent) => {
     e.preventDefault();
+    
     if (estaHabilitada(materia)) {
       toggleMateria(materia.id);
     } else {
-      const faltantesIds = materia.correlativas.filter(id => !aprobadas.includes(id));
+      const faltantesIds = (materia.requisitos || [])
+        .filter(req => req.materiaId && !aprobadas.includes(req.materiaId))
+        .map(req => req.materiaId as string);
       
       setHighlightedIds(faltantesIds);
 
-      const nombresFaltantes = faltantesIds.map(id => materias.find(m => m.id === id)?.nombre || id);
+      const nombresFaltantes = faltantesIds.map(id => 
+        materias.find(m => m.id === id)?.nombre || id
+      );
+
+      const requisitoFinales = (materia.requisitos || []).find(r => r.tipo === 'finales_cantidad');
+      const faltanFinales = requisitoFinales && aprobadas.length < (requisitoFinales.cantidad || 0);
+
+      if (faltanFinales) {
+        nombresFaltantes.push(`Tener al menos ${requisitoFinales.cantidad} finales (Tenés ${aprobadas.length})`);
+      }
       
       setToast({
         visible: true,
-        titulo: `Falta aprobar correlativas para ${materia.nombre}`,
+        titulo: `Faltan requisitos para ${materia.nombre}`,
         faltantes: nombresFaltantes
       });
     }
@@ -102,7 +95,7 @@ export default function Planificador() {
   return (
     <>
       <div className="mb-6 flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
-        <div>
+        <div className="w-full px-5 md:w-72 md:ml-5">
           <label htmlFor="carrera-select" className="block text-sm font-medium text-gray-700 mb-1">
             Carrera
           </label>

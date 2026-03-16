@@ -1,50 +1,41 @@
-# 🎓 UTN FRLP Academic Planner (Plan 2023)
+# 🎓 UTN FRLP - Mapa de Correlativas Interactivo
 
-Una aplicación web interactiva diseñada para estudiantes de Ingeniería en Sistemas de la UTN FRLP. Permite visualizar el plan de estudios, marcar el progreso académico y entender las correlatividades de forma intuitiva.
+![Astro](https://img.shields.io/badge/Astro-0C111A?style=for-the-badge&logo=astro&logoColor=white)
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
 
-Desarrollada utilizando **Astro** como base estática y **React** para las islas de interactividad.
+Una aplicación web escalable de tipo SPA (Single Page Application) diseñada para ayudar a los estudiantes de la **Universidad Tecnológica Nacional (FRLP)** a planificar su carrera, visualizar sus materias aprobadas y calcular automáticamente las correlatividades habilitadas.
 
-## 🚀 Tech Stack
+🌐 **[Ver la aplicación en vivo (Deploy en Vercel)](#)** *(Nota: Reemplazá el # con tu link real de Vercel)*
 
-* **Core:** [Astro](https://astro.build/) (Static Site Generation + Islands Architecture)
-* **UI/Logic:** [React](https://reactjs.org/) (Hooks personalizados & State Management)
-* **Styling:** [Tailwind CSS](https://tailwindcss.com/) (Diseño Responsive & Utility-first)
-* **Language:** [TypeScript](https://www.typescriptlang.org/) (Tipado estricto para robustez)
-* **Data:** JSON estructurado basado en la Ordenanza 1877 (Plan 2023).
+## ✨ Características Principales
 
-## ✨ Características Clave
+* **Multi-Carrera:** Soporte arquitectónico para múltiples planes de estudio (Ingeniería en Sistemas, Ingeniería Industrial).
+* **Validación Lógica en Tiempo Real:** Interfaz reactiva que ilumina las materias habilitadas basándose en los requisitos cumplidos (cursadas, finales, cantidad de materias aprobadas).
+* **Gestión de Estados en Cascada:** Implementación de algoritmos basados en grafos para la selección/deselección recursiva de materias y sus dependencias (hacia adelante y hacia atrás).
+* **Persistencia de Datos:** Uso de `localStorage` para que el estudiante no pierda su progreso al cerrar el navegador.
 
-### 1. 🧠 Algoritmo Recursivo de Correlativas (`useMaterias`)
-Implementación de un **Custom Hook** que maneja la lógica de dependencias bidireccional:
-* **Cascada Futura:** Al desmarcar una materia, el sistema recorre recursivamente el grafo hacia adelante para desmarcar automáticamente todas las materias que dependían de ella, evitando estados inconsistentes.
-* **Cascada Pasada:** Al aprobar un año completo, el sistema busca hacia atrás (ancestros) para asegurar que todos los requisitos previos estén cumplidos.
+## 🧠 Arquitectura y Decisiones de Ingeniería
 
-### 2. 🖱️ UX Avanzada: Drag-to-Scroll (`useDragScroll`)
-Para mejorar la navegación en Desktop sin perder la sensación nativa en Mobile, se desarrolló un hook matemático que permite arrastrar la grilla horizontalmente ("grab & drag"), calculando el diferencial de movimiento del mouse (`mousemove`) para ajustar el `scrollLeft` del contenedor.
+Este proyecto fue refactorizado con un enfoque en la **Escalabilidad** y **Clean Code**:
 
-### 3. 🔦 Feedback Visual Proactivo
-En lugar de listas de texto aburridas, el sistema ilumina la interfaz:
-* Si intentas marcar una materia bloqueada, el sistema **resalta (Highlight)** visualmente en la grilla cuáles son las materias faltantes exactas que necesitas aprobar.
-* Implementación de notificaciones tipo "Toast" no intrusivas.
+1. **Estandarización de Datos (Normalización):** Se migró de un sistema de correlativas simples a un modelo de `Requisitos` tipado estrictamente con TypeScript. Esto permite que la interfaz sea *agnóstica* a la carrera y pueda manejar reglas de negocio complejas (ej. "Tener 5 finales aprobados para cursar").
+2. **Carga Diferida (Lazy Loading):**
+   Los JSON de las carreras se cargan bajo demanda utilizando importaciones dinámicas (`import()`), optimizando el peso inicial (bundle size) de la aplicación.
+3. **Componentización Eficiente:**
+   Uso de Hooks personalizados (`useMaterias`, `useDragScroll`) para separar la lógica de negocio (reglas de la UTN) de la capa de presentación (React UI).
 
-### 4. 💾 Persistencia de Datos
-Uso de `localStorage` sincronizado con `useEffect` para guardar el progreso del estudiante en el navegador automáticamente.
+## 🚀 Instalación y Uso Local
 
-## 📂 Estructura del Proyecto
-
-El código sigue una arquitectura modular y escalable:
+Si querés correr el proyecto en tu máquina:
 
 ```bash
-src/
-├── components/
-│   └── planificador/       # Módulo encapsulado del planificador
-│       ├── index.tsx       # Componente orquestador
-│       ├── MateriaCard.tsx # UI de Tarjeta (Presentational Component)
-│       └── Toast.tsx       # Sistema de notificaciones
-├── hooks/
-│   ├── useMaterias.ts      # Lógica de negocio (Grafo de correlativas)
-│   └── useDragScroll.ts    # Lógica de UI (Física del scroll)
-├── data/
-│   └── materias.ts         # Fuente de verdad (Plan de estudios 2023)
-└── pages/
-    └── index.astro         # Punto de entrada (Islands architecture)
+# 1. Clonar el repositorio
+git clone [https://github.com/lauzubiri/UTN-Correlativas.git](https://github.com/lauzubiri/UTN-Correlativas.git)
+
+# 2. Instalar las dependencias
+npm install
+
+# 3. Iniciar el servidor de desarrollo
+npm run dev
