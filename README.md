@@ -7,7 +7,7 @@
 
 Una aplicación web escalable de tipo SPA (Single Page Application) diseñada para ayudar a los estudiantes de la **Universidad Tecnológica Nacional (FRLP)** a planificar su carrera, visualizar sus materias aprobadas y calcular automáticamente las correlatividades habilitadas.
 
-🌐 **[Ver la aplicación en vivo (Deploy en Vercel)](#)** *(Nota: Reemplazá el # con tu link real de Vercel)*
+🌐 **[Ver la aplicación en vivo (Deploy en Vercel)](https://utn-correlativas.vercel.app/)** 
 
 ## ✨ Características Principales
 
