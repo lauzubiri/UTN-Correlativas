@@ -23,7 +23,7 @@ export default function Planificador() {
     const cargarMaterias = async () => {
       setLoading(true);
       try {
-        const mod = await import(`../../data/${selectedCarrera}`);
+        const mod = await import(`../../data/${selectedCarrera}.ts`);
         if (!cancelled) {
           const data = mod.materias || mod.materiasIndustrial;
           setMaterias(data);
