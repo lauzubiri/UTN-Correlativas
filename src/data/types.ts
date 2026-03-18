@@ -10,6 +10,5 @@ export interface Materia {
   id: string;
   nombre: string;
   anio: number;
-  cuatrimestre?: string;
   requisitos: Requisito[];
 }
