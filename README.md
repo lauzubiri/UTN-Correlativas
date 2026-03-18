@@ -7,7 +7,7 @@
 
 Una aplicación web escalable de tipo SPA (Single Page Application) diseñada para ayudar a los estudiantes de la **Universidad Tecnológica Nacional (FRLP)** a planificar su carrera, visualizar sus materias aprobadas y calcular automáticamente las correlatividades habilitadas.
 
-🌐 **[Ver la aplicación en vivo (Deploy en Vercel)](#)** *(Nota: Reemplazá el # con tu link real de Vercel)*
+🌐 **[Ver la aplicación en vivo (Deploy en Vercel)](https://utn-correlativas.vercel.app/)** 
 
 ## ✨ Características Principales
 
@@ -24,7 +24,7 @@ Este proyecto fue refactorizado con un enfoque en la **Escalabilidad** y **Clean
 2. **Carga Diferida (Lazy Loading):**
    Los JSON de las carreras se cargan bajo demanda utilizando importaciones dinámicas (`import()`), optimizando el peso inicial (bundle size) de la aplicación.
 3. **Componentización Eficiente:**
-   Uso de Hooks personalizados (`useMaterias`, `useDragScroll`) para separar la lógica de negocio (reglas de la UTN) de la capa de presentación (React UI).
+   Uso de Hooks personalizados (`useMaterias`) para separar la lógica de negocio (reglas de la UTN) de la capa de presentación (React UI).
 
 ## 🚀 Instalación y Uso Local
 
