@@ -56,7 +56,7 @@ export default function Planificador() {
   const [toast, setToast] = useState<{ visible: boolean; titulo: string; faltantes: string[] } | null>(null);
   const [highlightedIds, setHighlightedIds] = useState<string[]>([]);
 
-  const { materias, loading, error, aprobadas, toggleMateria, toggleAnio, estaHabilitada } = useMaterias(selectedCarrera, user?.id);
+  const { materias, loading, error, aprobadas, cursadas, toggleMateria, toggleAnio, estaHabilitada } = useMaterias(selectedCarrera, user?.id);
   const { sliderRef, isDown, startDrag, stopDrag, onDrag } = useDragScroll();
 
   useEffect(() => {
@@ -282,6 +282,7 @@ export default function Planificador() {
                             key={materia.id}
                             materia={materia}
                             aprobada={aprobadas.includes(materia.id)}
+                            cursada={cursadas.includes(materia.id)}
                             habilitada={estaHabilitada(materia)}
                             highlighted={highlightedIds.includes(materia.id)}
                             onClick={(e) => handleCardClick(materia, e)}
